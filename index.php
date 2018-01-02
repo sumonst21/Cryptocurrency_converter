@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html>
 <body>
-
- <h1>Coinvert!</h1>
+<h1>Coinvert!</h1>
 <div id="btc"></div>
 <div id="container">
 
 <input type="text" id="bi" onchange="CryptoConvert(this);" onkeyup="CryptoConvert(this);"/> 
-<input type="text" name="ci" id="ci"onchange="FiatConvert(this);" onkeyup="FiatConvert(this);"/> <br>
-
-<br>
+<input type="text" name="ci" id="ci"onchange="FiatConvert(this);" onkeyup="FiatConvert(this);"/> 
 <form action="#" method="post">
+<select name="Crypto">
+<option value="Bitcoin">Bitcoin</option>
+<option value="Ethereum">Ethereum</option>
+<option value="Dash">Dash</option>
+<option value="Iota">Iota</option>
+<option value="Ripple">Ripple</option>
+</select>
 <select name="Fiat">
 <option value="USD">USD</option>
 <option value="EUR">EUR</option>
@@ -20,20 +24,30 @@
 </select>
 <input type="submit" name="submit" value="Get Selected Values" />
 </form>
+
 <?php
-
-
 if(isset($_POST['submit'])){
-$selected_val = $_POST['Fiat'];  // Storing Selected Value In Variable
-echo "You have selected :" .$selected_val;  // Displaying Selected Value
+$selected_crypto = $_POST['Crypto'];  // Storing Selected Value In Variable
+echo " " .$selected_crypto;  // Displaying Selected Value
+
+$selected_fiat = $_POST['Fiat'];  // Storing Selected Value In Variable
+echo " " .$selected_fiat;  // Displaying Selected Value
 }
-if($_POST['Fiat'] === 'EUR'){
+
+if($_POST['Fiat'] === 'EUR' && $_POST['Crypto'] ==='Bitcoin'){
 $tick = file_get_contents('https://api.coinmarketcap.com/v1/ticker/bitcoin/?convert=EUR'); 
 $url = $tick;
 $data = json_decode($tick, TRUE);
 $cur = $data[0]["price_eur"]; //price_fiat
 $curDisplay = round($cur, 2);
 }
+else if($_POST['Fiat'] === 'EUR' && $_POST['Crypto'] ==='Ethereum'){
+    $tick = file_get_contents('https://api.coinmarketcap.com/v1/ticker/ethereum/?convert=EUR'); 
+    $url = $tick;
+    $data = json_decode($tick, TRUE);
+    $cur = $data[0]["price_eur"]; //price_fiat
+    $curDisplay = round($cur, 2);
+    }
 else if($_POST['Fiat'] === 'DKK'){
     $tick = file_get_contents('https://api.coinmarketcap.com/v1/ticker/bitcoin/?convert=DKK'); 
     $url = $tick;
@@ -62,7 +76,6 @@ else{
     $cur = $data[0]["price_usd"]; //price_fiat
     $curDisplay = round($cur, 2);  
 }
-
 ?>
     <script>
     function CryptoConvert(input){
