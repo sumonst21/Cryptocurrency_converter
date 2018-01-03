@@ -34,48 +34,12 @@ $selected_fiat = $_POST['Fiat'];  // Storing Selected Value In Variable
 echo " " .$selected_fiat;  // Displaying Selected Value
 }
 
-if($_POST['Fiat'] === 'EUR' && $_POST['Crypto'] ==='Bitcoin'){
-$tick = file_get_contents('https://api.coinmarketcap.com/v1/ticker/bitcoin/?convert=EUR'); 
+$tick = file_get_contents('https://api.coinmarketcap.com/v1/ticker/' . $_POST['Crypto'] .'/?convert=' . $_POST['Fiat']); 
 $url = $tick;
 $data = json_decode($tick, TRUE);
-$cur = $data[0]["price_eur"]; //price_fiat
+$cur = $data[0]["price_" . strtolower($_POST['Fiat'])]; //price_fiat
 $curDisplay = round($cur, 2);
-}
-else if($_POST['Fiat'] === 'EUR' && $_POST['Crypto'] ==='Ethereum'){
-    $tick = file_get_contents('https://api.coinmarketcap.com/v1/ticker/ethereum/?convert=EUR'); 
-    $url = $tick;
-    $data = json_decode($tick, TRUE);
-    $cur = $data[0]["price_eur"]; //price_fiat
-    $curDisplay = round($cur, 2);
-    }
-else if($_POST['Fiat'] === 'DKK'){
-    $tick = file_get_contents('https://api.coinmarketcap.com/v1/ticker/bitcoin/?convert=DKK'); 
-    $url = $tick;
-    $data = json_decode($tick, TRUE);
-    $cur = $data[0]["price_dkk"]; //price_fiat
-    $curDisplay = round($cur, 2);
-    }
-    else if($_POST['Fiat'] === 'NOK'){
-        $tick = file_get_contents('https://api.coinmarketcap.com/v1/ticker/bitcoin/?convert=NOK'); 
-        $url = $tick;
-        $data = json_decode($tick, TRUE);
-        $cur = $data[0]["price_nok"]; //price_fiat
-        $curDisplay = round($cur, 2);
-        }
-        else if($_POST['Fiat'] === 'SEK'){
-            $tick = file_get_contents('https://api.coinmarketcap.com/v1/ticker/bitcoin/?convert=SEK'); 
-            $url = $tick;
-            $data = json_decode($tick, TRUE);
-            $cur = $data[0]["price_sek"]; //price_fiat
-            $curDisplay = round($cur, 2);
-            }
-else{
-    $tick = file_get_contents('https://api.coinmarketcap.com/v1/ticker/bitcoin/'); 
-    $url = $tick;
-    $data = json_decode($tick, TRUE);
-    $cur = $data[0]["price_usd"]; //price_fiat
-    $curDisplay = round($cur, 2);  
-}
+
 ?>
     <script>
     function CryptoConvert(input){
