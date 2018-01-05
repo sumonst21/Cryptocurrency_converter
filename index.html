@@ -1,107 +1,100 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cryptocurrency converter</title>
 </head>
 <body>
-<h1>Coinvert!</h1>
-<div id="btc"></div>
-<div id="container">
+    <h1>Cryptocurrency converter!</h1>
+    <div id="container">
+        <input type="text" id="bi" onchange="CryptoConvert(this);" onkeyup="CryptoConvert(this);" />
+        <select name="Crypto" id="Crypto" onchange="changeCurrency();">
+            <option selected="selected" value="Bitcoin">Bitcoin</option>
+            <option value="Ethereum">Ethereum</option>
+            <option value="Dash">Dash</option>
+            <option value="Iota">Iota</option>
+            <option value="Ripple">Ripple</option>
+        </select>
+        <input type="text" name="ci" id="ci" onchange="FiatConvert(this);" onkeyup="FiatConvert(this);" />
+        <select name="Fiat" id="Fiat" onchange="changeCurrency();">
+            <option value="AUD">AUD</option>
+            <option value="BRL">BRL</option>
+            <option value="CAD">CAD</option>
+            <option value="CHF">CHF</option>
+            <option value="CLP">CLP</option>
+            <option value="CNY">CNY</option>
+            <option value="CZK">CZK</option>
+            <option selected="selected" value="DKK">DKK</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <option value="HKD">HKD</option>
+            <option value="HUF">HUF</option>
+            <option value="IDR">IDR</option>
+            <option value="ILS">ILS</option>
+            <option value="INR">INR</option>
+            <option value="JPY">JPY</option>
+            <option value="KRW">KRW</option>
+            <option value="MXN">MXN</option>
+            <option value="MYR">MYR</option>
+            <option value="NOK">NOK</option>
+            <option value="NZD">NZD</option>
+            <option value="PHP">PHP</option>
+            <option value="PKR">PKR</option>
+            <option value="PLN">PLN</option>
+            <option value="USD">USD</option>
+            <option value="RUB">RUB</option>
+            <option value="SEK">SEK</option>
+            <option value="SGD">SGD</option>
+            <option value="THB">THB</option>
+            <option value="TRY">TRY</option>
+            <option value="TWD">TWD</option>
+            <option value="ZAR">ZAR</option>
+        </select>
+        <script>
+            var cur;
+            var ourData;
+            var ourRequest = new XMLHttpRequest();
+            var dpdCrypto = document.getElementById('Crypto');
+            var dpdFiat = document.getElementById('Fiat');
 
-<input type="text" id="bi" onchange="CryptoConvert(this);" onkeyup="CryptoConvert(this);"/> 
-<input type="text" name="ci" id="ci"onchange="FiatConvert(this);" onkeyup="FiatConvert(this);"/> 
-<form action="#" method="post">
-
-<select name="Crypto" id="Crypto" onchange="changeCurrency();">
-<option value="Bitcoin">Bitcoin</option>
-<option value="Ethereum">Ethereum</option>
-<option value="Dash">Dash</option>
-<option value="Iota">Iota</option>
-<option value="Ripple">Ripple</option>
-</select>
-
-<select name="Fiat" id="Fiat" onchange="changeCurrency();">
-<option value="AUD">AUD</option>
-<option value="BRL">BRL</option>
-<option value="CAD">CAD</option>
-<option value="CHF">CHF</option>
-<option value="CLP">CLP</option>
-<option value="CNY">CNY</option>
-<option value="CZK">CZK</option>
-<option value="DKK">DKK</option>
-<option value="EUR">EUR</option>
-<option value="GBP">GBP</option>
-<option value="HKD">HKD</option>
-<option value="HUF">HUF</option>
-<option value="IDR">IDR</option>
-<option value="ILS">ILS</option>
-<option value="INR">INR</option>
-<option value="JPY">JPY</option>
-<option value="KRW">KRW</option>
-<option value="MXN">MXN</option>
-<option value="MYR">MYR</option>
-<option value="NOK">NOK</option>
-<option value="NZD">NZD</option>
-<option value="PHP">PHP</option>
-<option value="PKR">PKR</option>
-<option value="PLN">PLN</option>
-<option value="RUB">RUB</option>
-<option value="SEK">SEK</option>
-<option value="SGD">SGD</option>
-<option value="THB">THB</option>
-<option value="TRY">TRY</option>
-<option value="TWD">TWD</option>
-<option value="ZAR">ZAR</option>
-</select>
-</form>
-
-<script>
-var ourRequest = new XMLHttpRequest();
-ourRequest.open('GET', 'https://api.coinmarketcap.com/v1/ticker/bitcoin/');
-ourRequest.onload = function(){
-var ourData = JSON.parse(ourRequest.responseText);
-var cur = ourData[0]["price_usd"];
-}
-function changeCurrency() {
-    var dpdCrypto = document.getElementById('Crypto');
-    var dpdFiat = document.getElementById('Fiat');
-    var fiat = dpdFiat.options[dpdFiat.selectedIndex].value;
-    var crypto = dpdCrypto.options[dpdCrypto.selectedIndex].value;
-    if(fiat && crypto != null){
-        ourRequest.open('GET', 'https://api.coinmarketcap.com/v1/ticker/' + crypto + '/?convert=' + fiat);
-        ourRequest.onload = function(){
-        ourData = JSON.parse(ourRequest.responseText);
-        cur = ourData[0]["price_" + fiat.toLowerCase()];
-        console.log(cur);
+            function changeCurrency() {
+                var fiat = dpdFiat.options[dpdFiat.selectedIndex].value;
+                var crypto = dpdCrypto.options[dpdCrypto.selectedIndex].value;
+                if (fiat && crypto != null) {
+                    ourRequest.open('GET', 'https://api.coinmarketcap.com/v1/ticker/' + crypto + '/?convert=' + fiat);
+                    ourRequest.onload = function () {
+                        ourData = JSON.parse(ourRequest.responseText);
+                        cur = ourData[0]["price_" + fiat.toLowerCase()];
+                        CryptoConvert(document.getElementById('bi'));
+                        FiatConvert(document.getElementById('ci'));
+                    }
+                } else {
+                    ourRequest.open('GET', 'https://api.coinmarketcap.com/v1/ticker/bitcoin/');
+                    ourRequest.onload = function () {
+                        ourData = JSON.parse(ourRequest.responseText);
+                        cur = ourData[0]["price_dkk"];
+                        CryptoConvert(document.getElementById('bi'));
+                        FiatConvert(document.getElementById('ci'));
+                    }
+                }
+                ourRequest.send();
             }
-        }
-    else{
-        ourRequest.open('GET','https://api.coinmarketcap.com/v1/ticker/bitcoin/');
-        ourRequest.onload = function(){
-        ourData = JSON.parse(ourRequest.responseText);
-        cur = ourData[0]["price_usd"];
-        console.log(cur);
-    }
-}
-ourRequest.send();
-}
-    function CryptoConvert(input){
-        // too slow
-        var price = cur; 
-        var output = input.value * price;
-        var co = document.getElementById('ci');
-        ci.value = output; 
-    }
-
-    function FiatConvert(input){
-        var price = cur; 
-        var output = input.value / price;
-        var co = document.getElementById('bi');
-        bi.value = output;
-
-    }
-    </script>
-</div>
-
+            changeCurrency(); //imports currency so that it's not empty on start
+            function CryptoConvert(input) {
+                var price = cur;
+                var output = input.value * price;
+                var co = document.getElementById('ci');
+                ci.value = output;
+            }
+            function FiatConvert(input) {
+                var price = cur;
+                var output = input.value / price;
+                var co = document.getElementById('bi');
+                bi.value = output;
+            }
+        </script>
+    </div>
 </body>
 </html>
