@@ -1,0 +1,12 @@
+#valutaContainer,
+#cryptoContainer,
+input {
+    float: left;
+    padding: 5px;
+}
+
+#valutaContainer select,
+#cryptoContainer select {
+    width: 100%;
+    margin-bottom: 10px;
+}

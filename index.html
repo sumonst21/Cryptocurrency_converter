@@ -1,62 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Cryptocurrency converter</title>
+    <link rel="stylesheet" href="style/style.css">
 </head>
+
 <body>
     <h1>Cryptocurrency converter!</h1>
     <div id="container">
-        <input type="text" id="bi" onchange="CryptoConvert(this);" onkeyup="CryptoConvert(this);" />
-        <select name="Crypto" id="Crypto" onchange="changeCurrency();">
-            <option selected="selected" value="Bitcoin">Bitcoin</option>
-            <option value="Ethereum">Ethereum</option>
-            <option value="Dash">Dash</option>
-            <option value="Iota">Iota</option>
-            <option value="Ripple">Ripple</option>
-        </select>
-        <input type="text" name="ci" id="ci" onchange="FiatConvert(this);" onkeyup="FiatConvert(this);" />
-        <select name="Fiat" id="Fiat" onchange="changeCurrency();">
-            <option value="AUD">AUD</option>
-            <option value="BRL">BRL</option>
-            <option value="CAD">CAD</option>
-            <option value="CHF">CHF</option>
-            <option value="CLP">CLP</option>
-            <option value="CNY">CNY</option>
-            <option value="CZK">CZK</option>
-            <option selected="selected" value="DKK">DKK</option>
-            <option value="EUR">EUR</option>
-            <option value="GBP">GBP</option>
-            <option value="HKD">HKD</option>
-            <option value="HUF">HUF</option>
-            <option value="IDR">IDR</option>
-            <option value="ILS">ILS</option>
-            <option value="INR">INR</option>
-            <option value="JPY">JPY</option>
-            <option value="KRW">KRW</option>
-            <option value="MXN">MXN</option>
-            <option value="MYR">MYR</option>
-            <option value="NOK">NOK</option>
-            <option value="NZD">NZD</option>
-            <option value="PHP">PHP</option>
-            <option value="PKR">PKR</option>
-            <option value="PLN">PLN</option>
-            <option value="USD">USD</option>
-            <option value="RUB">RUB</option>
-            <option value="SEK">SEK</option>
-            <option value="SGD">SGD</option>
-            <option value="THB">THB</option>
-            <option value="TRY">TRY</option>
-            <option value="TWD">TWD</option>
-            <option value="ZAR">ZAR</option>
-        </select>
+        <div id="cryptoContainer">
+            <select name="Crypto" id="Crypto" onchange="changeCurrency();">
+                <option selected="selected" value="Bitcoin">Bitcoin</option>
+                <option value="Ethereum">Ethereum</option>
+                <option value="Dash">Dash</option>
+                <option value="Iota">Iota</option>
+                <option value="Ripple">Ripple</option>
+            </select>
+            <br>
+            <input type="number" lang="en-150" value="1" id="bi" onchange="CryptoConvert(this);" onkeyup="CryptoConvert(this);" />
+        </div>
+        <div id="valutaContainer">
+            <select name="Fiat" id="Fiat" onchange="changeCurrency();">
+                <option value="AUD">AUD</option>
+                <option value="BRL">BRL</option>
+                <option value="CAD">CAD</option>
+                <option value="CHF">CHF</option>
+                <option value="CLP">CLP</option>
+                <option value="CNY">CNY</option>
+                <option value="CZK">CZK</option>
+                <option selected="selected" value="DKK">DKK</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option value="HKD">HKD</option>
+                <option value="HUF">HUF</option>
+                <option value="IDR">IDR</option>
+                <option value="ILS">ILS</option>
+                <option value="INR">INR</option>
+                <option value="JPY">JPY</option>
+                <option value="KRW">KRW</option>
+                <option value="MXN">MXN</option>
+                <option value="MYR">MYR</option>
+                <option value="NOK">NOK</option>
+                <option value="NZD">NZD</option>
+                <option value="PHP">PHP</option>
+                <option value="PKR">PKR</option>
+                <option value="PLN">PLN</option>
+                <option value="USD">USD</option>
+                <option value="RUB">RUB</option>
+                <option value="SEK">SEK</option>
+                <option value="SGD">SGD</option>
+                <option value="THB">THB</option>
+                <option value="TRY">TRY</option>
+                <option value="TWD">TWD</option>
+                <option value="ZAR">ZAR</option>
+            </select>
+            <br>
+            <input type="number" lang="en-150" value="1" name="ci" id="ci" onchange="FiatConvert(this);" onkeyup="FiatConvert(this);" />
+        </div>
     </div>
     <script src="js/main.js"></script>
-    <script>
-        changeCurrency(); //imports currency so that it's not empty on start
-    </script>
 </body>
-
 </html>

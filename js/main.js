@@ -3,6 +3,7 @@ var ourData;
 var ourRequest = new XMLHttpRequest();
 var dpdCrypto = document.getElementById('Crypto');
 var dpdFiat = document.getElementById('Fiat');
+
 function changeCurrency() {
     var fiat = dpdFiat.options[dpdFiat.selectedIndex].value;
     var crypto = dpdCrypto.options[dpdCrypto.selectedIndex].value;
@@ -12,7 +13,6 @@ function changeCurrency() {
             ourData = JSON.parse(ourRequest.responseText);
             cur = ourData[0]["price_" + fiat.toLowerCase()];
             CryptoConvert(document.getElementById('bi'));
-            FiatConvert(document.getElementById('ci'));
         }
     } else {
         ourRequest.open('GET', 'https://api.coinmarketcap.com/v1/ticker/bitcoin/');
@@ -20,16 +20,16 @@ function changeCurrency() {
             ourData = JSON.parse(ourRequest.responseText);
             cur = ourData[0]["price_dkk"];
             CryptoConvert(document.getElementById('bi'));
-            FiatConvert(document.getElementById('ci'));
         }
     }
     ourRequest.send();
 }
+changeCurrency(); //runs on start to retrieve data for the currencies 
 function CryptoConvert(input) {
     var price = cur;
     var output = input.value * price;
     var co = document.getElementById('ci');
-    ci.value = output;
+    ci.value = output.toFixed(2);
 }
 
 function FiatConvert(input) {
