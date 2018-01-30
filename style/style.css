@@ -1,12 +1,37 @@
-#valutaContainer,
-#cryptoContainer,
-input {
-    float: left;
-    padding: 5px;
+body {
+    background-color: #fcfcfc;
 }
 
-#valutaContainer select,
-#cryptoContainer select {
+#container {
+    width: 30%;
+    margin: 0 auto;
+    font-family: arial;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#ci,
+#bi,
+#Fiat,
+#Crypto {
     width: 100%;
-    margin-bottom: 10px;
+    height: 60px;
+    text-align: center;
+}
+
+select {
+    text-align: center;
+    text-align-last: center;
+}
+
+input{
+    padding-top: 10px;
+}
+
+#inputNumber1, #inputNumber2{
+    width: 97%;
+}
+#cryptoContainer,
+#valutaContainer {
+    padding-bottom: 10px;
 }

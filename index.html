@@ -9,17 +9,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-    <h1>Cryptocurrency converter!</h1>
     <div id="container">
         <div id="cryptoContainer">
             <select name="Crypto" id="Crypto" onchange="changeCurrency();">
                 <option selected="selected" value="Bitcoin">Bitcoin</option>
             </select>
             <br>
-            <input type="number" class="number" value="1.00" step="1.00" id="bi" onchange="CryptoConvert(this);" onkeyup="CryptoConvert(this);" />
+            <div id="inputNumber1">
+                <input type="number" class="number" value="1.00" step="any" id="bi" onchange="CryptoConvert(this);" onkeyup="CryptoConvert(this);"
+                />
+            </div>
         </div>
         <div id="valutaContainer">
             <select name="Fiat" id="Fiat" onchange="changeCurrency();">
+                <option disabled="Valuta" value="Valuta"> - &nbsp Valuta </option>
                 <option value="AUD">AUD</option>
                 <option value="BRL">BRL</option>
                 <option value="CAD">CAD</option>
@@ -52,9 +55,13 @@
                 <option value="TRY">TRY</option>
                 <option value="TWD">TWD</option>
                 <option value="ZAR">ZAR</option>
+                <option disabled="Kryptovaluta" value="Kryptovaluta">- &nbsp Kryptovaluta </option>
             </select>
             <br>
-            <input type="number" class="number" value="1" step="1.00" name="ci" id="ci" onchange="FiatConvert(this);" onkeyup="FiatConvert(this);" />
+            <div id="inputNumber2">
+                <input type="number" class="number" value="1" step="any" name="ci" id="ci" onchange="FiatConvert(this);" onkeyup="FiatConvert(this);"
+                />
+            </div>
         </div>
     </div>
     <script src="js/main.js"></script>

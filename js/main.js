@@ -3,12 +3,14 @@ var ourData;
 var ourRequest = new XMLHttpRequest();
 var dpdCrypto = document.getElementById('Crypto'); //dropdown
 var dpdFiat = document.getElementById('Fiat'); //dropdown
+var apiUrl = 'https://api.coinmarketcap.com/v1/ticker/?convert=';
+var apiUrlLimit = '&limit=100';
 // retrives data from the API. The dropdowns determines which data.
 function changeCurrency() {
     var fiat = dpdFiat.options[dpdFiat.selectedIndex].value;
     var crypto = dpdCrypto.options[dpdCrypto.selectedIndex].value;
     if (fiat && crypto != null) {
-        ourRequest.open('GET', 'https://api.coinmarketcap.com/v1/ticker/?convert=' + fiat + '&limit=100');
+        ourRequest.open('GET', apiUrl + fiat + apiUrlLimit);
         ourRequest.onload = function () {
             ourData = JSON.parse(ourRequest.responseText);
             for (var i = 0; i < ourData.length; i++) {
@@ -45,8 +47,10 @@ function FiatConvert(input) {
     var co = document.getElementById('bi');
     bi.value = output;
 }
-// populate crypto dropdown with API data.
+
+// populate crypto and fiat dropdown with API data.
 var dropdown = document.getElementById('Crypto');
+var dropdown2 = document.getElementById('Fiat');
 dropdown.length = 0;
 var defaultOption = document.createElement('option');
 defaultOption.text = 'Bitcoin';
@@ -61,9 +65,9 @@ request.onload = function () {
         option = document.createElement('option');
         option.text = data[i].name;
         dropdown.add(option);
+        option2 = document.createElement('option');
+        option2.text = data[i].symbol;
+        dropdown2.add(option2);
     }
 }
-request.onerror = function () {
-    console.error('An error occurred fetching the JSON from ' + url);
-};
 request.send();
